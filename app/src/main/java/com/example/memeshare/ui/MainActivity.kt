@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.memeshare.databinding.ActivityMainBinding
 import com.example.memeshare.ui.adapters.MemeViewPagerAdapter
+import com.example.memeshare.ui.transitionanimations.DepthAnimationViewPager
 import com.example.memeshare.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.memeViewPager.adapter=memeVIewPagerAdapter
+        binding.memeViewPager.setPageTransformer(DepthAnimationViewPager())
 
 
 
