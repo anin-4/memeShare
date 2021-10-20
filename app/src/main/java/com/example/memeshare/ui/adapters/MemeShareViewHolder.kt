@@ -12,7 +12,7 @@ sealed class MemeShareViewHolder(binding: ViewBinding):RecyclerView.ViewHolder(b
 
         fun bind(meme:MemeEntity){
             binding.textView.text=meme.title
-            Glide.with(itemView).load(meme.ImgUrl).into(binding.memeImageView)
+            Glide.with(itemView).load(meme.ImgUrl).into(binding.memeImageViewInside)
         }
     }
 

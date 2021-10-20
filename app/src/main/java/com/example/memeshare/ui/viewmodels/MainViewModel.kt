@@ -24,11 +24,24 @@ class MainViewModel @Inject constructor(
         getDataFromApi()
     }
 
-    private fun getDataFromApi(){
+   private fun getDataFromApi(){
         viewModelScope.launch {
             val response=apiCall.getAllItems()
             _memes.value=response.memes
 
+        }
+    }
+
+    fun addDataToListFromApi(){
+        viewModelScope.launch {
+            val response = apiCall.getAllItems()
+            val oldResponse = _memes.value
+            val newList:MutableList<MemeEntity> =  mutableListOf()
+            if (oldResponse != null) {
+                newList.addAll(oldResponse)
+            }
+            newList.addAll(response.memes)
+            _memes.value=newList
         }
     }
 }
