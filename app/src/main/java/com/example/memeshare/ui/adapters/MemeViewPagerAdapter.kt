@@ -8,12 +8,7 @@ import com.example.memeshare.models.MemeEntity
 
 class MemeViewPagerAdapter:RecyclerView.Adapter<MemeShareViewHolder>() {
 
-    var memes:List<MemeEntity> = listOf()
-        set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
-
+    var memes:MutableList<MemeEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemeShareViewHolder {
         val binding = MemeItemListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
