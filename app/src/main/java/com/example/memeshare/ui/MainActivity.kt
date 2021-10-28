@@ -69,6 +69,12 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.getDataFromApi()
+            binding.swipeRefresh.isRefreshing=false
+
+        }
+
     }
 
 }

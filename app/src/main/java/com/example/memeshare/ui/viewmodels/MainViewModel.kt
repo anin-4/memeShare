@@ -33,6 +33,7 @@ class MainViewModel @Inject constructor(
            repository.getAllData().collect {
                Log.d("viewModel", "getDataFromApi: ${it.data?.size}")
                _memes.value=it
+
            }
        }
     }
