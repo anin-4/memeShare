@@ -1,14 +1,14 @@
 package com.example.memeshare.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.memeshare.databinding.ActivityMainBinding
+import com.example.memeshare.models.MemeEntity
 import com.example.memeshare.ui.adapters.MemeViewPagerAdapter
 import com.example.memeshare.ui.transitionanimations.DepthAnimationViewPager
 import com.example.memeshare.ui.viewmodels.MainViewModel
@@ -28,6 +28,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.memeViewPager.adapter=memeVIewPagerAdapter
+        memeVIewPagerAdapter.itemListener ={item: MemeEntity,_ ->
+            val intent = Intent().apply {
+                action=Intent.ACTION_SEND
+                type="text/plain"
+                putExtra(Intent.EXTRA_TEXT,item.ImgUrl)
+
+            }
+            val shareIntent =Intent.createChooser(intent,"Share this meme")
+            startActivity(shareIntent)
+
+        }
         binding.memeViewPager.setPageTransformer(DepthAnimationViewPager())
 
 
@@ -51,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             val data = it.data
             data?.let{ list->
                 memeVIewPagerAdapter.memes.addAll(list)
-                memeVIewPagerAdapter.notifyDataSetChanged()
+                memeVIewPagerAdapter.notifyItemInserted(data.size-1)
             }
             binding.progressCircular.isVisible =  it is Resource.Loading && it.data.isNullOrEmpty()
             binding.noInternetImage.isVisible = it is Resource.Error && it.data.isNullOrEmpty()

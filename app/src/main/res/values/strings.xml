@@ -3,4 +3,5 @@
     <string name="image_title">Image Title</string>
     <string name="meme">Meme</string>
     <string name="no_internet_image">No internet image</string>
+    <string name="share_button">share button</string>
 </resources>
